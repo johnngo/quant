@@ -30,7 +30,7 @@ class MeasuredOrangeFish(QCAlgorithm):
 
         if not self.Portfolio.Invested:
             if self.nextEntryTime <= self.Time:
-                self.SetHoldingds(self.spy, 1)
+                self.SetHoldings(self.spy, 1)
                 #self.MarketOrder(self.spy, int(self.Portfolio.Cash/ price) )
                 self.Log("BUY SPY @" + str(price))
                 self.entryPrice = price
