@@ -1,15 +1,15 @@
 class MeasuredOrangeFish(QCAlgorithm):
 
     def Initialize(self):
-        self.SetStartDate(2020,1,1)
-        self.SetEndDate(2021,1,1)
-        self.SetCash(100000)
+        self.SetStartDate(2020, 1, 1) # Set Start Date
+        self.SetEndDate(2021, 1, 1) # Set End Date
+        self.SetCash(100000) # Set Strategy Cash
 
         spy = self.AddEquity("SPY", Resolution.Daily)
         #self.AddForex, self.AddFuture
         spy.SetDataNormalizationMode(DataNormalizationMode.Raw)
         
-        self.spy = spy.symbol
+        self.spy = spy.Symbol
 
         self.SetBenchmark("SPY")
         self.SetBrokerageModel(BrokerageName.InteractiveBrokersBrokerage, AccountType.Margin)
@@ -29,13 +29,15 @@ class MeasuredOrangeFish(QCAlgorithm):
         #price = self.secruities[self.spy].close
 
         if not self.Portfolio.Invested:
-            if self.nextEntryTrime <= self.Time:
-                self.SetHoldingds(self.spy,1)
+            if self.nextEntryTime <= self.Time:
+                self.SetHoldingds(self.spy, 1)
                 #self.MarketOrder(self.spy, int(self.Portfolio.Cash/ price) )
                 self.Log("BUY SPY @" + str(price))
                 self.entryPrice = price
 
-        elif self.entryPrice * 1.1 < price or self.entryPrice * 0.9 > price:
-            self.Liquidate(self.spy)
+        elif self.entryPrice * 1.1 < price or self.entryPrice * 0.90 > price:
+            self.Liquidate()
             self:Log("Sell SPY @" + str(price))
             self.nextEntryTime = self.Time + self.period
+
+
