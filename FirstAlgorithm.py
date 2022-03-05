@@ -1,3 +1,5 @@
+###simple SPY Algorithms, we want to cut losses if spy loses 10% and take profits if SPY gains 10%, 
+###after loss or gain is executes, stop for 1month before entering again
 class MeasuredOrangeFish(QCAlgorithm):
 
     def Initialize(self):
